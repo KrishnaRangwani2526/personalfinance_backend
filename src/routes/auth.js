@@ -27,6 +27,8 @@ router.post('/login', async (req, res) => {
   try {
     const { phoneNumber, password } = req.body;
     
+    console.log('Login attempt:', { phoneNumber, password: '***' });
+    
     if (!phoneNumber || !password) {
       return res.status(400).json({ error: 'Phone number and password required' });
     }
@@ -37,8 +39,11 @@ router.post('/login', async (req, res) => {
     );
     
     if (!hardcodedUser) {
+      console.log('Invalid credentials for:', phoneNumber);
       return res.status(401).json({ error: 'Invalid credentials' });
     }
+    
+    console.log('User found:', hardcodedUser.name);
     
     // Create or update user in database
     let user = await prisma.user.findUnique({
@@ -69,6 +74,8 @@ router.post('/login', async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: '30d' }
     );
+    
+    console.log('Login successful for:', phoneNumber);
     
     res.json({
       token,
