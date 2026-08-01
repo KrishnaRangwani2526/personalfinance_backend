@@ -65,9 +65,19 @@ PORT=3000
 NODE_ENV=development
 DATABASE_URL="postgresql://user:password@localhost:5432/myledger?schema=public"
 JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
-ADMIN_PHONE=9999999999
-ADMIN_PASSWORD=SecureAdmin@2026!#ChangeThis
 ```
+
+## Pre-configured Accounts
+
+**Admin Account:**
+- Phone Number: `9999999999`
+- Password: `Admin@123`
+
+**User Account:**
+- Phone Number: `9928452506`
+- Password: `9928452506`
+
+Note: Only these two accounts can login. Signup functionality has been disabled.
 
 ## API Endpoints
 
