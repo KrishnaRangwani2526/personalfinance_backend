@@ -40,6 +40,30 @@ app.use('/api/users', userRoutes);
 app.use('/api/data', dataRoutes);
 app.use('/api/admin', adminRoutes);
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    message: 'MyLedger Backend is running',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'MyLedger Backend API',
+    version: '1.0.0',
+    endpoints: {
+      health: '/health',
+      auth: '/api/auth',
+      users: '/api/users',
+      data: '/api/data',
+      admin: '/api/admin'
+    }
+  });
+});
+
 // Socket.io for real-time sync
 const connectedUsers = new Map();
 
